@@ -1,0 +1,11 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "ft_package"
+version = "0.0.1"
+authors = [{ name="hyun-zhe" }, { email="hyun-zhe@student.42kl.edu.my" }]
+description = "A sample test package"
+readme = "README.md"
+requires-python = ">=3.10"
