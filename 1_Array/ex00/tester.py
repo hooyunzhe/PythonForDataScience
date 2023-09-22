@@ -1,28 +1,30 @@
 from give_bmi import give_bmi, apply_limit
 
+
 def assert_raises(function_to_test, *args, expected_exception=AssertionError):
-	print(f"\033[0;36m{function_to_test.__name__}{args}:\033[0m ", end="")
-	try:
-		function_to_test(*args)
-		print(f"\033[0;31mTest failed\033[0m")
-		print(f"	\033[3;31m\033[3mNo exceptions were raised\033[0m")
-	except expected_exception as e:
-		print(f"\033[0;32mTest passed\033[0m")
-		print(f"	\033[2;35m\033[3mRaises [{type(e).__name__}: {e}]\033[0m")
-	except Exception as e:
-		print(f"\033[0;31mTest failed\033[0m")
-		print(f"	\033[3;31m{type(e).__name__}: {e}\033[0m")
+    print(f"\033[0;36m{function_to_test.__name__}{args}:\033[0m ", end="")
+    try:
+        function_to_test(*args)
+        print("\033[0;31mTest failed\033[0m")
+        print("	\033[3;31m\033[3mNo exceptions were raised\033[0m")
+    except expected_exception as e:
+        print("\033[0;32mTest passed\033[0m")
+        print(f"	\033[2;35m\033[3mRaises [{type(e).__name__}: {e}]\033[0m")
+    except Exception as e:
+        print("\033[0;31mTest failed\033[0m")
+        print(f"	\033[3;31m{type(e).__name__}: {e}\033[0m")
+
 
 def assert_equals(function_to_test, *args, expected_output):
-	print(f"\033[0;36m{function_to_test.__name__}{args}:\033[0m ", end="")
-	try:
-		output = function_to_test(*args)
-		assert output == expected_output
-		print(f"\033[0;32mTest passed\033[0m")
-		print(f"	\033[2;32m\033[3mReturns {output}\033[0m")
-	except AssertionError as e:
-		print(f"\033[0;31mTest failed\033[0m")
-		print(f"	\033[3;31m{type(e).__name__}: {e}\033[0m")
+    print(f"\033[0;36m{function_to_test.__name__}{args}:\033[0m ", end="")
+    try:
+        output = function_to_test(*args)
+        assert output == expected_output
+        print("\033[0;32mTest passed\033[0m")
+        print(f"	\033[2;32m\033[3mReturns {output}\033[0m")
+    except AssertionError as e:
+        print("\033[0;31mTest failed\033[0m")
+        print(f"	\033[3;31m{type(e).__name__}: {e}\033[0m")
 
 
 # arguments must be lists

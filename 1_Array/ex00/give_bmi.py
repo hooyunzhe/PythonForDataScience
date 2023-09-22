@@ -1,62 +1,82 @@
-import sys as Sys
+import numpy as np
 
 
-def give_bmi(height: list[int | float], weight: list[int | float]) -> list[int | float]:
-	"""
-	A function that calculates BMIs from given heights and weights
+def give_bmi(
+    height: list[int | float],
+    weight: list[int | float]
+) -> list[int | float]:
+    """
+    A function that calculates BMIs from given heights and weights
 
-	Arguments:
-		height (list[int | float]): List of heights in meters
-		weight (list[int | float]): List of weights in kilograms
+    Arguments:
+        height (list[int | float]): List of heights in meters
+        weight (list[int | float]): List of weights in kilograms
 
-	Returns:
-		a list of BMIs calculated from the input
-	"""
+    Returns:
+        a list of BMIs calculated from the input
+    """
 
-	# hide traceback message for assertion errors
-	Sys.tracebacklimit = 0
+    # make sure the arguments are lists
+    assert type(height) is list, "height must be a list"
+    assert type(weight) is list, "weight must be a list"
 
-	# make sure the arguments are lists
-	assert type(height) is list, "height must be a list"
-	assert type(weight) is list, "weight must be a list"
+    # convert to numpy arrays
+    height_array = np.array(height)
+    weight_array = np.array(weight)
 
-	# make sure the two lists are the same size
-	assert len(height) == len(weight), "height and weight must have the same size"
+    # make sure the two lists are the same size
+    assert height_array.size == weight_array.size, (
+        "height and weight must have the same size")
 
-	# make sure the lists only contain ints or floats
-	assert all(type(n) is int or type(n) is float for n in height), "height must only contain ints or floats"
-	assert all(type(n) is int or type(n) is float for n in weight), "weight must only contain ints or floats"
+    # make sure the lists only contain ints or floats
+    #
+    # by default, numpy.array converts python int/float types to
+    # numpy.int64/float64 types which are sub types of numpy.number
 
-	# make sure the values are within the expected range
-	assert all(n > 0 and n <= 3 for n in height), "heights must be in meters and not zero"
-	assert all(n > 0 and n <= 1000 for n in weight), "weights must be in kilograms and not zero"
+    assert np.issubdtype(height_array.dtype, np.number), (
+        "height must only contain ints or floats")
+    assert np.issubdtype(weight_array.dtype, np.number), (
+        "weight must only contain ints or floats")
 
-	# the calculated BMIs
-	return [w / (h * h) for h, w in zip(height, weight)]
+    # make sure the values are within the expected range
+    #
+    # numpy arrays support broadcasting when using operators
+    # which means they will be applied to each element
+    #
+    # for boolean arrays, logical operators can be used
+    # instead of their functional equivalents
+    assert np.all(np.logical_and(height_array > 0, height_array <= 3)), (
+        "heights must be in meters and not zero")
+    assert np.all(np.logical_and(weight_array > 0, weight_array <= 1000)), (
+        "weights must be in kilograms and not zero")
+
+    # the calculated BMIs
+    return np.divide(weight_array, np.power(height_array, 2)).tolist()
 
 
 def apply_limit(bmi: list[int | float], limit: int) -> list[bool]:
-	"""
-	A function that transforms given list of BMIs to
-	booleans indicating whether each is above the limit
+    """
+    A function that transforms given list of BMIs to
+    booleans indicating whether each is above the limit
 
-	Arguments:
-		bmi (list[int | float]): list of BMIs to transform
-		limit (int): BMIs have to be above this limit
+    Arguments:
+        bmi (list[int | float]): list of BMIs to transform
+        limit (int): BMIs have to be above this limit
 
-	Returns:
-		a list of booleans where True means above the limit
-	"""
+    Returns:
+        a list of booleans where True means above the limit
+    """
 
-	# hide traceback message for assertion errors
-	Sys.tracebacklimit = 0
+    # make sure the arguments are a list and an int
+    assert type(bmi) is list, "bmi must be a list"
+    assert type(limit) is int, "limit must be an int"
 
-	# make sure the arguments are a list and an int
-	assert type(bmi) is list, "bmi must be a list"
-	assert type(limit) is int, "limit must be an int"
+    # convert to numpy array
+    bmi_array = np.array(bmi)
 
-	# make sure the list only contains ints or floats
-	assert all(type(n) is int or type(n) is float for n in bmi), "bmi must only contain ints or floats"
+    # make sure the list only contains ints or floats
+    assert np.issubdtype(bmi_array.dtype, np.number), (
+        "bmi must only contain ints or floats")
 
-	# transform the list
-	return [n > limit for n in bmi]
+    # transform the list
+    return np.greater(bmi_array, limit).tolist()
