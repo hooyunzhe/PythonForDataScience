@@ -15,18 +15,6 @@ def assert_raises(function_to_test, *args, expected_exception=AssertionError):
         print(f"	\033[3;31m{type(e).__name__}: {e}\033[0m")
 
 
-def assert_equals(function_to_test, *args, expected_output):
-    print(f"\033[0;36m{function_to_test.__name__}{args}:\033[0m ", end="")
-    try:
-        output = function_to_test(*args)
-        assert output == expected_output
-        print("\033[0;32mTest passed\033[0m")
-        print(f"	\033[2;32m\033[3mReturns {output}\033[0m")
-    except AssertionError as e:
-        print("\033[0;31mTest failed\033[0m")
-        print(f"	\033[3;31m{type(e).__name__}: {e}\033[0m")
-
-
 # initialize the 2D array
 family = [[1.80, 78.4],
           [2.15, 102.7],
@@ -42,10 +30,10 @@ assert_raises(slice_me, [[42], [1, 2]], 0, 1)
 assert_raises(slice_me, [[42]], "0", 1)
 assert_raises(slice_me, [[42]], 0, "1")
 
-# should print shape (4, 2) and (2, 2)
+# should print shapes (4, 2) and (2, 2)
 # should return [[1.8, 78.4], [2.15, 102.7]]
 print(slice_me(family, 0, 2))
 
-# should print shape (4, 2) and (1, 2)
+# should print shapes (4, 2) and (1, 2)
 # should return [[2.15, 102.7]]
 print(slice_me(family, 1, -2))
