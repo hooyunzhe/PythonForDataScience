@@ -1,7 +1,36 @@
 import sys as Sys
 
 
-# docstrings are a 
+# docstrings are used to document
+# functions, methods, classes, scripts/programs, modules and packages
+# there are various conventions for docstrings but they usually contain
+#   functions/methods:
+#       - short description of its behavior
+#       - details of the accepted arguments
+#       - details of the return value/s
+#       - exceptions that could be raised
+#       - short examples of its usage
+#   classes:
+#       - short description of the subject
+#       - short descriptions of its methods
+#       - short descriptions of its attributes
+#   scripts/programs:
+#       - short description of its behavior
+#       - details of the accepted arguments
+#       - details of the output
+#       - short descriptions of its functions
+#   modules:
+#       - short description of the subject
+#       - lists its exported
+#           - classes
+#           - functions
+#           - variables
+#           - exceptions
+#   packages:
+#       - short description of the subject
+#       - lists its exported
+#           - modules
+#           - sub-packages
 def main():
     """
     A program that counts different characters of a given string
