@@ -50,7 +50,8 @@ def main():
     countries_data.plot(
         title="Population Projections",
         xlabel="Year",
-        ylabel="Population")
+        ylabel="Population"
+    )
 
     # extract the y ticks and transform to numbers with M short form
     locs, labels = plt.yticks()
