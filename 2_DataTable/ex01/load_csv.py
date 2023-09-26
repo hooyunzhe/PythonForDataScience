@@ -16,11 +16,23 @@ def load(path: str) -> pd.DataFrame:
     # make sure path is a string
     assert type(path) is str, "path must be a string"
 
-    # open the csv file
-    df = pd.read_csv(path)
+    # make sure path is a csv file
+    assert path.endswith(".csv"), "path must be a valid csv file"
 
-    # print the shape of the data frame
-    print(f"Loading dataset of dimensions {df.shape}")
+    try:
+        # open the csv file
+        df = pd.read_csv(path)
 
-    # return the data frame
-    return df
+        # print the shape of the data frame
+        print(f"Loading dataset of dimensions {df.shape}")
+
+        # return the data frame
+        return df
+    except FileNotFoundError:
+        raise AssertionError("path must be an existing file") from None
+    except PermissionError:
+        raise AssertionError("path must be an accessible file") from None
+    except pd.errors.EmptyDataError:
+        raise AssertionError("path must not be an empty file") from None
+    except pd.errors.ParserError:
+        raise AssertionError("path must have valid csv format") from None
