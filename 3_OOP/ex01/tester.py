@@ -12,7 +12,7 @@ def assert_equals(name, value, expected_value):
         print(f"	\033[3;31m{name} does not equal {expected_value}\033[0m")
 
 
-# instantiate the subclass
+# instantiate the class
 Robert = Baratheon("Robert")
 
 # should set first name and House attributes correctly
@@ -47,7 +47,7 @@ assert_equals("type(Robert.__doc__)", type(Robert.__doc__), str)
 
 print("----------------------------------------------------------------------")
 
-# instantiate the subclass
+# instantiate the class
 Cersei = Lannister("Cersei")
 
 # should set first name and House attributes correctly
