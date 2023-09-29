@@ -1,6 +1,21 @@
 from ft_calculator import calculator
 
 
+def assert_raises(function_to_test, *args, expected_exception=AssertionError):
+    arg_list = str(list(args))[1:-1]
+    print(f"\033[0;36m{function_to_test.__name__}({arg_list}):\033[0m", end="")
+    try:
+        function_to_test(*args)
+        print("\033[0;31m Test failed\033[0m")
+        print("	\033[3;31m\033[3mNo exceptions were raised\033[0m")
+    except expected_exception as e:
+        print("\033[0;32m Test passed\033[0m")
+        print(f"	\033[2;35m\033[3mRaises [{type(e).__name__}: {e}]\033[0m")
+    except Exception as e:
+        print("\033[0;31m Test failed\033[0m")
+        print(f"	\033[3;31m{type(e).__name__}: {e}\033[0m")
+
+
 def assert_equals(name, value, expected_value):
     print(f"\033[0;36m{name}:\033[0m", end="")
     try:
@@ -41,3 +56,6 @@ v3 - 5
 assert_equals("v3.vector", v3.vector, [5.0, 10.0, 15.0])
 v3 / 5
 assert_equals("v3.vector", v3.vector, [1.0, 2.0, 3.0])
+
+# should not be able to divide by 0
+assert_raises(v3.__truediv__, 0)

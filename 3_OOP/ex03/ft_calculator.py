@@ -82,6 +82,9 @@ class calculator:
             scalar (int | float): scalar to divide
         """
 
+        # make sure scalar is not 0 to prevent division by 0
+        assert scalar != 0, "cannot divide by zero"
+
         # apply division to the vector
         self.vector = [n / scalar for n in self.vector]
 
