@@ -45,6 +45,13 @@ assert_equals("student.surname", student.surname, "agle")
 assert_equals("student.active", student.active, True)
 assert_equals("student.login", student.login, "Eagle")
 
+# should print
+# Student(
+#   name='Edward', surname='agle',
+#   active=True, login='Eagle',
+#   id='randomly_generated_id')
+print(student)
+
 # should not be able to instantiate with non-initializable attributes
 assert_raises(
     Student,
