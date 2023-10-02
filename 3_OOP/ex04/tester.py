@@ -1,5 +1,8 @@
 from ft_calculator import calculator
 
+# the @staticmethod decorator allows methods 
+# to be called without a class object
+
 # initialize the arrays
 a = [5, 10, 2]
 b = [2, 4, 3]
