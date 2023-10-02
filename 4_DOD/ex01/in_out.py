@@ -43,7 +43,7 @@ def outer(x: int | float, function) -> object:
         nonlocal count
         nonlocal result
 
-        # increment count
+        # increment counter
         count += 1
 
         # calculate and return the new result
