@@ -1,6 +1,6 @@
 from ft_calculator import calculator
 
-# the @staticmethod decorator allows methods 
+# the @staticmethod decorator allows methods
 # to be called without a class object
 
 # initialize the arrays
