@@ -20,7 +20,7 @@ def assert_raises(function_to_test, *args, expected_exception=AssertionError):
 assert_raises(load, 42)
 
 # path must be valid
-assert_raises(load, "42.csv", expected_exception=FileNotFoundError)
+assert_raises(load, "42.csv")
 
 # should print shape (195, 302)
 # should return DataFrame of life expectancy of countries
